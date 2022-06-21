@@ -1,4 +1,4 @@
-<?php // This file is mostly containing things for your view / html ?>
+<?php // This file is mostly containing things for your view / html?>
 
 <!doctype html>
 <html lang="en">
@@ -9,7 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
           rel="stylesheet"/>
-    <title>Your fancy store</title>
+    <title>Z Gadgets</title>
+    <link rel="icon" type="image/x-icon" href="https://www.clipartmax.com/png/full/106-1060728_dragon-ball-z-icon.png">
 </head>
 <body>
 <div class="container">
@@ -27,7 +28,7 @@
         </ul>
     </nav>
     */ ?>
-    <form method="post">
+    <form action="index.php" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
@@ -66,21 +67,31 @@
             <?php foreach ($products as $i => $product): ?>
                 <label>
                     <?php // <?= is equal to <?php echo ?>
-                    <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $product['name'] ?> -
+                    <input type="checkbox" value="<?php echo $i?>" name="products[<?php echo $i ?>]"/> <?php echo $product['name'] ?> -
                     &euro; <?= number_format($product['price'], 2) ?></label><br />
             <?php endforeach; ?>
         </fieldset>
 
-        <button type="submit" class="btn btn-primary">Order!</button>
+        <button type="submit" class="btn btn-dark" name ="submit">Order!</button>
     </form>
 
-    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong>.</footer>
 </div>
 
 <style>
+    body {
+        background-image: url("https://wallpaperaccess.com/full/9794.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;;
+        font-weight: bolder;
+        font-family: sans-serif;
+        color:orangered;
+        margin: 0;
+        height: 100vh;
+    }
     footer {
         text-align: center;
     }
 </style>
 </body>
-</html>
+</html

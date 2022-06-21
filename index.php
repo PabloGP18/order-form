@@ -23,18 +23,62 @@ function whatIsHappening() {
 
 // TODO: provide some products (you may overwrite the example)
 $products = [
-    ['name' => 'Your favourite drink', 'price' => 2.5],
+    ['name' => 'Goku ultra instinct Figure', 'price' => 69.9],
+    ['name' => 'Super Saiyan Vegeta Figure', 'price' => 30.0],
+    ['name' => 'Bardock Figure', 'price' => 49.9],
+    ['name' => 'Super Saiyan Goku Figure', 'price' => 30.0],
+    ['name' => 'Super Saiyan Future Trunks Figure', 'price' => 35.0],
+    ['name' => 'Super Saiyan Gohan Figure', 'price' => 30.0],
+    ['name' => 'Broly Figure', 'price' => 40.0],
+    ['name' => 'Gotenks Figure', 'price' => 39.0],
+    ['name' => 'Goku Figure', 'price' => 50.0]
 ];
+
+if(isset($_POST['submit'])){
+    handleForm($products);
+}
 
 $totalValue = 0;
 
 function validate()
 {
-    // TODO: This function will send a list of invalid fields back
-    return [];
+    /*$emailErr = $streetErr = $streetNrErr = $cityErr = $zipcodeErr = "";
+    $email = $street = $streetNr = $city = $zipcode = "";
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+        } else {
+            $email = test_input($_POST["email"]);
+        }
+
+        if (empty($_POST["street"])) {
+            $streetErr = "street name is required";
+        } else {
+            $street = test_input($_POST["street"]);
+        }
+
+        if (empty($_POST["streetnumber"])) {
+            $streetNrErr = "street number is required";
+        } else {
+            $streetNr = test_input($_POST["streetnumber"]);
+        }
+
+        if (empty($_POST["city"])) {
+            $cityErr = "city name is required";
+        } else {
+            $city = test_input($_POST["city"]);
+        }
+
+        if (empty($_POST["zipcode"])) {
+            $zipcodeErr = "zipcode is required";
+        } else {
+            $zipcode = test_input($_POST["zipcode"]);
+        }
+    }    return [$emailErr];*/
 }
 
-function handleForm()
+function handleForm($productsZarray)
 {
     // TODO: form related tasks (step 1)
 
@@ -44,6 +88,25 @@ function handleForm()
         // TODO: handle errors
     } else {
         // TODO: handle successful submission
+        if (isset($_POST['submit'])){
+            $emailInfo = $_POST['email'];
+            $streetInfo = $_POST['street'];
+            $streetNrInfo = $_POST['streetnumber'];
+            $cityInfo = $_POST['city'];
+            $zipcodeInfo = $_POST['zipcode'];
+
+            $checkedItems = [];
+            $checkedItemsNames = [];
+
+            foreach ($_POST['products'] as $value){
+                array_push($checkedItems,$productsZarray[$value]);
+                array_push($checkedItemsNames,$productsZarray[$value]['name']);
+            }
+
+            echo "Thank you for your purchase of " . implode("-", $checkedItemsNames) . ". We will send these to $cityInfo";
+            //var_dump($checkedItems);
+            //var_dump($checkedItemsNames);
+        }
     }
 }
 
