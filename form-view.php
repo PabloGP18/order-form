@@ -9,8 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
           rel="stylesheet"/>
-    <title>Z Gadgets</title>
-    <link rel="icon" type="image/x-icon" href="https://www.clipartmax.com/png/full/106-1060728_dragon-ball-z-icon.png">
+    <title>Your fancy store</title>
 </head>
 <body>
 <div class="container">
@@ -28,11 +27,11 @@
         </ul>
     </nav>
     */ ?>
-    <form action="index.php" method="post">
+    <form action="index.php" action ="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" class="form-control"/>
+                <input type="email" id="email" name="email" class="form-control" placeholder="<?php if (isset($emailErr)){ echo $emailErr;} ?>">
             </div>
             <div></div>
         </div>
@@ -43,21 +42,21 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control">
+                    <input type="text" name="street" id="street" class="form-control" placeholder="<?php if (isset($streetErr)){ echo $streetErr;} ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" placeholder="<?php if (isset($streetNrErr)){ echo $streetNrErr;} ?>">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">City:</label>
-                    <input type="text" id="city" name="city" class="form-control">
+                    <input type="text" id="city" name="city" class="form-control" placeholder="<?php if (isset($cityErr)){ echo $cityErr;} ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
-                    <input type="text" id="zipcode" name="zipcode" class="form-control">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="<?php if (isset($zipcodeErr)){ echo $zipcodeErr;} ?>">
                 </div>
             </div>
         </fieldset>
@@ -72,26 +71,34 @@
             <?php endforeach; ?>
         </fieldset>
 
-        <button type="submit" class="btn btn-dark" name ="submit">Order!</button>
+        <button type="submit" class="btn btn-primary" name="submit">Order!</button>
+        <br>
+        <br>
+        <br>
+        <fieldset>
+            <div>
+
+                <p>
+                    <?php if (isset($_POST['submit'])){echo $orderConfirmation;}?>
+                    <?php if(isset($_POST['submit'])){echo "chosen product(s): ".implode("-" , $nameProducts).'<br/>';}?>
+                    <?php if (isset($emailInfo)){ echo $emailInfo;}?> <br>
+                    <?php if (isset($streetInfo)){ echo $streetInfo;}?><br>
+                    <?php if (isset($streetNrInfo)){ echo $streetNrInfo;}?><br>
+                    <?php if (isset($cityInfo)){ echo $cityInfo;}?><br>
+                    <?php if (isset($zipcodeInfo)){ echo $zipcodeInfo;}?>
+                </p>
+            </div>
+        </fieldset>
+
     </form>
 
-    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong>.</footer>
+    <footer>You already ordered <strong>&euro; <?php if(isset($_POST['submit'])){echo array_sum($priceProducts);} ?></strong> in food and drinks.</footer>
 </div>
 
 <style>
-    body {
-        background-image: url("https://wallpaperaccess.com/full/9794.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;;
-        font-weight: bolder;
-        font-family: sans-serif;
-        color:orangered;
-        margin: 0;
-        height: 100vh;
-    }
     footer {
         text-align: center;
     }
 </style>
 </body>
-</html
+</html>
